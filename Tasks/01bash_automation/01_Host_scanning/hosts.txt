@@ -1,0 +1,10 @@
+c0d.ist
+google.com
+seasides.com
+this-host-should-not-exist.com
+netflix.com
+apple.com
+chatgpt.com
+example.com
+github.com
+youtube.com

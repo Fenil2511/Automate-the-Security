@@ -1,0 +1,2 @@
+github-pages.c0d.ist
+s3-bucket.c0d.ist

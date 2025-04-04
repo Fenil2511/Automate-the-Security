@@ -1,0 +1,2 @@
+port,host,state,reason,name,product,version,extrainfo,conf,cpe
+443,78.47.71.170,open,syn-ack,https,,,,3,

@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Nmap Scan Report</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 20px;
+        background-color: #f4f4f9;
+      }
+      h1 {
+        color: #333;
+      }
+      .report-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+      }
+      .report-table th,
+      .report-table td {
+        padding: 10px;
+        border: 1px solid #ddd;
+        text-align: left;
+      }
+      .report-table th {
+        background-color: #4caf50;
+        color: white;
+      }
+      .report-table tr:nth-child(even) {
+        background-color: #f2f2f2;
+      }
+      .section {
+        margin-bottom: 30px;
+      }
+      .summary {
+        background-color: #e8f5e9;
+        padding: 15px;
+        border-radius: 5px;
+      }
+      .summary p {
+        font-size: 16px;
+      }
+      .host-info {
+        background-color: #e8f5e9;
+        padding: 15px;
+        border-radius: 5px;
+      }
+      .host-info b {
+        color: #388e3c;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Nmap Scan Report</h1>
+    <p><strong>Scan performed on:</strong> {{ scan_time }}</p>
+
+    <div class="summary">
+      <h2>Scan Summary</h2>
+      <p><b>Total Hosts Scanned:</b> {{ total_hosts }}</p>
+      <p><b>Total Open Ports Found:</b> {{ total_open_ports }}</p>
+      <p><b>Elapsed Time:</b> {{ elapsed_time }} seconds</p>
+      <p><b>Summary:</b> {{ scan_summary }}</p>
+    </div>
+
+    {% for host in hosts %}
+    <div class="host-info">
+      <h2>Host Information</h2>
+      <p><b>Host IP:</b> {{ host.address }}</p>
+      <p><b>Host Status:</b> {{ host.status }}</p>
+      <p>
+        <b>Hostnames:</b> {% if host.hostnames %} {{ host.hostnames }} {% else
+        %} N/A {% endif %}
+      </p>
+    </div>
+
+    <div class="section">
+      <h2>Open Ports & Services</h2>
+      <table class="report-table">
+        <thead>
+          <tr>
+            <th>Port</th>
+            <th>Protocol</th>
+            <th>State</th>
+            <th>Service</th>
+            <th>Version</th>
+            <th>Extra Info</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for port in host.ports %}
+          <tr>
+            <td>{{ port.portid }}</td>
+            <td>{{ port.protocol }}</td>
+            <td>{{ port.state }}</td>
+            <td>{{ port.service_name }}</td>
+            <td>{{ port.version }}</td>
+            <td>{{ port.extrainfo }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+    {% endfor %}
+  </body>
+</html>
